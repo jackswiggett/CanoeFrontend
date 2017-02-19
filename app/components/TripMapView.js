@@ -107,9 +107,9 @@ var TripMapView = React.createClass({
       <MapView style={styles.mapView}
         initialRegion={{
           latitude: currentLat,
-          longitude: currentLong+20/3,
-          latitudeDelta: 10,
-          longitudeDelta: 20,
+          longitude: currentLong+28,
+          latitudeDelta: 20,
+          longitudeDelta: 60,
         }}>
         {flightsToShow.map(marker => (
           <MapView.Marker
