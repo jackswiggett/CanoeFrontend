@@ -9,6 +9,7 @@ import RateCities from '../containers/RateCities';
 import Settings from '../containers/Settings';
 import TripDigest from '../containers/TripDigest';
 import TripDetails from '../containers/TripDetails';
+import TripMap from '../containers/TripMap';
 
 class CurrentView extends Component {
   constructor(props) {
@@ -38,6 +39,10 @@ class CurrentView extends Component {
         return (
           <TripDetails />
         );
+      case "TRIP_MAP":
+        return (
+          <TripMap />
+        );
       default:
         return (
           <View>
@@ -48,6 +53,9 @@ class CurrentView extends Component {
         );
     }
   }
+  // return (
+  //   <TripMap />
+  // );
 }
 
 const styles = StyleSheet.create({

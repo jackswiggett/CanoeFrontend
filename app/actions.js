@@ -57,7 +57,8 @@ export const Views = {
   RATE_CITIES: "RATE_CITIES",
   TRIP_DIGEST: "TRIP_DIGEST",
   TRIP_DETAILS: "TRIP_DETAILS",
-  SETTINGS: "SETTINGS"
+  SETTINGS: "SETTINGS",
+  TRIP_MAP: "TRIP_MAP",
 };
 
 const FETCH_TRIP_DIGEST_ENDPOINT = "http://canoes.azurewebsites.net/flightquerylocations/";
@@ -75,7 +76,7 @@ export function setCurrentView(view) {
     type: SET_CURRENT_VIEW,
     view: view
   };
-} 
+}
 
 export function setUserId(userID){
 	return {
@@ -237,4 +238,3 @@ export function fetchTopDestinations() {
       });
   }
 }
-

@@ -9,7 +9,8 @@ const mapStateToProps = (state, ownProps) => {
     destinationName: trip.city,
     startDate: trip.departure_date,
     endDate: trip.return_date,
-    price: trip.price
+    price: trip.price,
+    img: trip.img
   };
 };
 

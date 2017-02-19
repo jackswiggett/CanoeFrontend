@@ -15,7 +15,10 @@ const TripDigestView = function(props) {
   if (props.trips.length > 5) {
     trips = props.trips.slice(0, 5);
   }
-
+  var mapbutton = null
+  if(!props.loading) {
+    mapbutton = (<Button title="Map View" onPress={() => {props.showTripMapView();}}/>);
+  }
   return (
     <View style = {{flex: 1}}>
       <View style = {{flex: 1, height: 40, flexDirection: 'row', justifyContent: 'flex-start', marginRight: 20, alignItems: 'center', paddingTop: 20}}>
@@ -46,6 +49,7 @@ const TripDigestView = function(props) {
             );
           })
         }
+      {mapbutton}
       </View>
     </View>
   );

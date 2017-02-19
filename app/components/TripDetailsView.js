@@ -14,7 +14,7 @@ const TripDetailsView = function(props) {
         {props.destinationName}
       </Text>
       <View style={styles.imageview}>
-        <Image source={{uri: 'https://facebook.github.io/react/img/logo_og.png'}}
+        <Image source={{uri: props.img}}
        style={{flex:3}} />
       </View>
     <View style = {styles.infocontainer}>
