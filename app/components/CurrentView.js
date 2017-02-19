@@ -8,6 +8,7 @@ import Login from '../containers/Login';
 import RateCities from '../containers/RateCities';
 import Settings from '../containers/Settings';
 import TripDigest from '../containers/TripDigest';
+import TripDetails from '../containers/TripDetails';
 
 const CurrentView = function(props) {
   switch (props.currentView) {
@@ -27,11 +28,15 @@ const CurrentView = function(props) {
       return (
         <TripDigest />
       );
+    case "TRIP_DETAILS":
+      return (
+        <TripDetails />
+      );
     default:
       return (
         <View>
           <Text style={styles.viewName}>
-            foo
+            View {props.currentView} is not implemented.
           </Text>
         </View>
       );
@@ -43,6 +48,7 @@ const styles = StyleSheet.create({
     fontSize: 20,
     textAlign: 'center',
     margin: 10,
+    paddingTop: 100
   }
 });
 

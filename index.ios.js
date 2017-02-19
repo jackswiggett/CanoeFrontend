@@ -11,19 +11,24 @@ import {
   Text,
   View
 } from 'react-native';
+import 'babel-polyfill';
 
-//import { render } from 'react-dom'
-import { Provider } from 'react-redux'
-import { createStore } from 'redux'
-import canoeApp from './app/reducers'
-import App from './app/components/App'
+import thunkMiddleware from 'redux-thunk';
+import createLogger from 'redux-logger';
+import { Provider } from 'react-redux';
+import { createStore, applyMiddleware } from 'redux';
+import canoeApp from './app/reducers';
+import App from './app/components/App';
 
-let store = createStore(canoeApp);
+const loggerMiddleware = createLogger()
 
-let unsubscribe = store.subscribe(() =>
-  console.log(store.getState())
-)
-
+const store = createStore(
+  canoeApp,
+  applyMiddleware(
+    thunkMiddleware, // lets us dispatch() functions
+    loggerMiddleware // log actions
+  )
+);
 
 export default class Canoe extends Component {
   render() {

@@ -4,20 +4,12 @@ import {
   SET_USER_ID,
   SET_MAX_PRICE,
   SET_TRIP_DURATIONS,
+  REQUEST_TRIP_DIGEST,
+  RECEIVE_TRIP_DIGEST,
+  SET_TRIP_DETAILS_INDEX,
   Views
 } from './actions';
-const { LOGIN } = Views
-
-/*export default function canoeApp(state = initialState, action) {
-  switch (action.type) {
-    case SET_CURRENT_VIEW:
-      return Object.assign({}, state, {
-        currentView: action.view
-      });
-    default:
-      return state;
-  }
-}*/
+const { LOGIN } = Views;
 
 function currentView(state = LOGIN, action) {
   switch (action.type) {
@@ -37,7 +29,7 @@ function userId(state = '', action){
   }
 }
 
-function maxPrice(state = 200, action) {
+function maxPrice(state = 400, action) {
   switch (action.type) {
     case SET_MAX_PRICE:
       return action.maxPrice;
@@ -59,35 +51,44 @@ function tripDurations(state = {short: true, medium: true, long: true}, action) 
   }
 }
 
-/*function todos(state = [], action) {
+function tripDetailsIndex(state = 0, action) {
   switch (action.type) {
-    case ADD_TODO:
-      return [
-        ...state,
-        {
-          text: action.text,
-          completed: false
-        }
-      ]
-    case TOGGLE_TODO:
-      return state.map((todo, index) => {
-        if (index === action.index) {
-          return Object.assign({}, todo, {
-            completed: !todo.completed
-          })
-        }
-        return todo
-      })
+    case SET_TRIP_DETAILS_INDEX:
+      return action.index;
     default:
-      return state
+      return state;
   }
-}*/
+}
+
+const defaultTripDigest = {
+  isFetching: false,
+  items: []
+}
+
+function tripDigest(state = defaultTripDigest, action) {
+  switch (action.type) {
+    case REQUEST_TRIP_DIGEST:
+      return Object.assign({}, state, {
+        isFetching: true
+      });
+    case RECEIVE_TRIP_DIGEST:
+      return Object.assign({}, state, {
+        isFetching: false,
+        items: action.items,
+        lastUpdated: action.receivedAt
+      });
+    default:
+      return state;
+  }
+}
 
 const canoeApp = combineReducers({
   currentView,
   userId,
   maxPrice,
-  tripDurations
+  tripDurations,
+  tripDigest,
+  tripDetailsIndex
 });
 
 export default canoeApp;

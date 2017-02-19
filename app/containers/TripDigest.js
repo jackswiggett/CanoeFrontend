@@ -1,20 +1,23 @@
 import { connect } from 'react-redux';
 import TripDigestView from '../components/TripDigestView';
-//import { setUserId, setCurrentView, Views }  from '../actions.js';
+import { setTripDetailsIndex, setCurrentView, Views }  from '../actions.js';
 
 const mapStateToProps = (state, ownProps) => {
-  return {};
+  return {
+    loading: state.tripDigest.isFetching,
+    trips: state.tripDigest.items
+  };
 };
 
 const mapDispatchToProps = (dispatch, ownProps) => {
-  return {};
-/*    setUserId: (newId) => {
-      dispatch(setUserId(newId))
+  return {
+    setTripDetailsIndex: (index) => {
+      dispatch(setTripDetailsIndex(index));
     },
-    loginClicked: () => {
-      dispatch(setCurrentView(Views.RATE_CITIES))
+    showTripDetails: () => {
+      dispatch(setCurrentView(Views.TRIP_DETAILS));
     }
-  };*/
+  };
 };
 
 const TripDigest = connect(

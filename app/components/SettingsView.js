@@ -12,7 +12,7 @@ class SettingsView extends Component {
   constructor(props) {
     super(props);
     this.state = {};
-    this.state.maxPrice = 200;
+    this.state.maxPrice = props.maxPrice;
     this.state.durations = {
       short: true,
       medium: true,
@@ -41,7 +41,7 @@ class SettingsView extends Component {
       self.props.setTripDurations(durations.short, durations.medium, durations.long);
 
       // return to Trip Digest
-      self.props.exit();
+      self.props.exit(self.state.maxPrice, "Francis", "short");
     }
 
     return (

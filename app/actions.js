@@ -1,3 +1,24 @@
+import 'whatwg-fetch';
+
+/* Shape of our data store (for reference):
+{
+  currentView: "SETTINGS",
+  userId: "Francis",
+  maxPrice: 400,
+  tripDurations: {
+    short: true,
+    medium: true,
+    long: false
+  },
+  tripDigest: {
+    isFetching: false,
+    items: [...], // list of javascript objects representing possible trips, as returned by API
+    lastUpdated: 1439478405547
+  },
+  tripDetailsIndex: 1 // index of trip currently shown in the TripDetails view
+}
+*/
+
 /*
  * action types
  */
@@ -6,6 +27,12 @@ export const SET_CURRENT_VIEW = "SET_CURRENT_VIEW";
 export const SET_USER_ID = "SET_USER_ID";
 export const SET_MAX_PRICE = "SET_MAX_PRICE";
 export const SET_TRIP_DURATIONS = "SET_TRIP_DURATIONS";
+export const SET_TRIP_DETAILS_INDEX = "SET_TRIP_DETAILS_INDEX";
+
+// HTTP Request actions
+export const REQUEST_TRIP_DIGEST = "REQUEST_TRIP_DIGEST";
+export const RECEIVE_TRIP_DIGEST = "RECEIVE_TRIP_DIGEST";
+// TODO: action on error when requestion trip digest
 
 /*
  * other constants
@@ -18,6 +45,9 @@ export const Views = {
   TRIP_DETAILS: "TRIP_DETAILS",
   SETTINGS: "SETTINGS"
 };
+
+const FETCH_TRIP_DIGEST_ENDPOINT = "http://canoes.azurewebsites.net/flightquery/";
+const FETCH_TRIP_DIGEST_ORIGIN = "SFO"; // TODO: find current location rather than hard-coding
 
 /*
  * action creators
@@ -53,3 +83,80 @@ export function setTripDurations(short, medium, long) {
     long: long
   };
 }
+
+export function setTripDetailsIndex(index) {
+  return {
+    type: SET_TRIP_DETAILS_INDEX,
+    index: index
+  };
+}
+
+export function requestTripDigest() {
+  return {
+    type: REQUEST_TRIP_DIGEST
+  };
+}
+
+export function receiveTripDigest(json) {
+  return {
+    type: RECEIVE_TRIP_DIGEST,
+    items: json,
+    receivedAt: Date.now()
+  };
+}
+
+export function fetchTripDigest(maxPrice, user, duration) {
+  return function(dispatch) {
+    dispatch(requestTripDigest());
+
+    // Format the range of possible departure dates
+    const startDate = new Date();
+    startDate.setDate(startDate.getDate() + 1); // tomorrow
+    const endDate = new Date();
+    endDate.setDate(endDate.getDate() + 7); // a week later
+
+    function formatDate(date) {
+      let isoDate = date.toISOString();
+      if (isoDate.length === 27) {
+        isoDate = isoDate.slice(3);
+      }
+
+      return isoDate.slice(0, 10);
+    }
+
+    const dateRange = formatDate(startDate) + "--" + formatDate(endDate);
+
+    // Format the trip duration range
+    let durationRange;
+    switch (duration) {
+      case "short":
+        durationRange = "1--2";
+      case "medium":
+        durationRange = "3--6";
+      case "long":
+        durationRange = "7--21";
+      default:
+        // default to one week or less
+        durationRange = "1--7";
+    }
+
+    return fetch(
+      FETCH_TRIP_DIGEST_ENDPOINT +
+      "?origin=" + FETCH_TRIP_DIGEST_ORIGIN +
+      "&max_price=" + maxPrice +
+      "&departure_date=" + dateRange +
+      "&user=" + user +
+      "&duration=" + durationRange)
+        .then(response => {
+          return response.json();
+        })
+        .then(json => {
+          dispatch(receiveTripDigest(json))
+        })
+        .catch(function(error) {
+          console.log("Error getting trip digest: " + error.message);
+        });
+  }
+}
+
+
