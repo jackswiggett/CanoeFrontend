@@ -55,6 +55,7 @@ class DestinationRating extends Component {
 const styles = StyleSheet.create({
   destinationRating: {
     margin: 10,
+    paddingLeft: 10,
     flex: 1,
     alignItems: 'stretch'
   },
@@ -72,7 +73,8 @@ const styles = StyleSheet.create({
     aspectRatio: 1
   },
   destinationName: {
-    fontSize: 25
+    fontSize: 25,
+    fontFamily: 'Avenir'
   }
 });
 

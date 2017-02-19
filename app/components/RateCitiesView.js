@@ -19,7 +19,7 @@ class RateCitiesView extends Component {
   render() {
     const welcomeMessage = "Hi, " + this.props.userId + "!";
     const instructions = "In order to find trips that you'll love, " +
-      "please rate any of the following destinations that you've already visited.";
+      "rate any of the following destinations that you've already visited.";
 
     let self = this;
 
@@ -61,7 +61,7 @@ class RateCitiesView extends Component {
             style={styles.button}
             disabled={this.props.destinations.length < self.state.pageIndex * 5 + 10} />
           <Button
-            title="Continue"
+            title="Finish"
             onPress = {() => this.props.continue()}
             style={styles.button} />
         </View>
@@ -76,26 +76,32 @@ const styles = StyleSheet.create({
     fontSize: 25,
     textAlign: 'center',
     margin: 10,
+    fontFamily: 'Avenir'
   },
   loadingMessage: {
     fontSize: 18,
     textAlign: 'center',
-    margin: 20
+    margin: 20,
+    fontFamily: 'Avenir'
   },
   instructions: {
     fontSize: 20,
     textAlign: 'center',
     margin: 10,
+    paddingLeft: 10,
+    paddingRight: 10,
+    fontFamily: 'Avenir'
   },
   bottomView: {
     flex: 1,
     flexDirection: 'row',
-    justifyContent: 'space-around'
+    justifyContent: 'space-around',
+    alignItems: 'center'
   },
   button: {
-    fontSize : 16,
     margin: 10,
-    flex: 1
+    flex: 1,
+    fontFamily: 'Avenir'
   }
 });
 

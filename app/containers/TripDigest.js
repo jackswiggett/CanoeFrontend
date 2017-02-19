@@ -16,6 +16,9 @@ const mapDispatchToProps = (dispatch, ownProps) => {
     },
     showTripDetails: () => {
       dispatch(setCurrentView(Views.TRIP_DETAILS));
+    },
+    showSettings: () => {
+      dispatch(setCurrentView(Views.SETTINGS))
     }
   };
 };

@@ -8,15 +8,20 @@ import {
 
 
 const TripSummary = function(props) {
-   var date1 = new Date(props.startDate.toString())
-   var date2 = new Date(props.endDate.toString())
+   var date1 = new Date(props.startDate)
+   var date2 = new Date(props.endDate)
    var timeDiff = Math.abs(date2.getTime() - date1.getTime());
    var diffDays = Math.ceil(timeDiff / (1000 * 3600 * 24)); 
   return (
     <TouchableHighlight onPress={props.onPress} style={styles.container}>
       <View style={styles.tripSummary}>
-        <Text style={styles.textStyle}>{props.destinationName}</Text>
-        <Text style={styles.textStyle}>{diffDays} days</Text>
+        <Text style={styles.name}>{props.destinationName}</Text>
+        <Text style={styles.duration}>
+          {diffDays} day{diffDays > 1 ? "s" : ""}
+        </Text>
+        <Text style={styles.duration}>
+          ${props.price}
+        </Text>
       </View>
     </TouchableHighlight>
   );
@@ -25,15 +30,21 @@ const TripSummary = function(props) {
 const styles = StyleSheet.create({
   tripSummary: {
     margin: 10,
-    flex: 1
+    padding: 10,
+    flex: 1,
+    justifyContent: 'center'
   },
   container: {
     flex: 1,
     alignItems: 'flex-start'
   },
-  textStyle: {
-    fontFamily: 'Iowan Old Style',
-    fontSize: 24
+  name: {
+    fontFamily: 'Avenir',
+    fontSize: 26
+  },
+  duration: {
+    fontFamily: 'Avenir',
+    fontSize: 20
   }
 });
 

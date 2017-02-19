@@ -43,7 +43,7 @@ const styles = StyleSheet.create({
     fontSize: 32,
     textAlign: 'center',
     margin: 10,
-    fontFamily: 'Iowan Old Style'
+    fontFamily: 'Avenir'
   },
   button: {
     fontSize : 16,
@@ -63,7 +63,7 @@ const styles = StyleSheet.create({
   },
   textStyle: {
     fontSize:24,
-    fontFamily: 'Iowan Old Style'
+    fontFamily: 'Avenir'
   }
 });
 

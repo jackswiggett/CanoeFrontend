@@ -79,7 +79,7 @@ const styles = StyleSheet.create({
   },
   viewName: {
     fontSize: 60,
-    fontFamily: 'Iowan Old Style'
+    fontFamily: 'Avenir'
   },
   textinput: {
     fontSize: 25,
@@ -89,6 +89,7 @@ const styles = StyleSheet.create({
   },
   button: {
     fontSize : 25,
+    fontFamily: 'Avenir'
   //  justifyContent: 'flex-end'
   }
 });

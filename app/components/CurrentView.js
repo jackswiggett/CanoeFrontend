@@ -55,7 +55,8 @@ const styles = StyleSheet.create({
     fontSize: 20,
     textAlign: 'center',
     margin: 10,
-    paddingTop: 100
+    paddingTop: 100,
+    fontFamily: 'Avenir'
   }
 });
 

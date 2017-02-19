@@ -5,7 +5,8 @@ import {
   StyleSheet,
   TextInput,
   Button,
-  TouchableOpacity
+  TouchableOpacity,
+  Image
 } from 'react-native';
 import NumberInput from './NumberInput';
 
@@ -23,8 +24,9 @@ class SettingsView extends Component {
 
   render() {
     const introduction = "Tell us a little bit about the trips you'd like to go on.";
-    const priceMessage = "I'm willing to spend up to (in USD)";
-    const durationMessage = "I'd like to go on trips of (select all that apply)";
+    const priceMessage = "I'm willing to spend up to";
+    const durationMessage = "I'd like to go on trips of";
+    const durationNote = "(select either or both)";
 
     function toggleDuration(self, duration) {
       if (duration === "short" || duration === "medium" || duration === "long") {
@@ -48,15 +50,14 @@ class SettingsView extends Component {
     return (
       <View style = {styles.bg}>
         <View style = {styles.container}>
-          <Text style={styles.title}>
-            Hi, {this.props.userId}! {introduction}
+          <Text style={styles.instructions}>
+            {introduction}
           </Text>
         </View>
         <View style={styles.container}>
           <Text style={styles.textStyle}>
             {priceMessage}
           </Text>
-
           <NumberInput
             style = {styles.textinputStyle}
             value = {this.state.maxPrice}
@@ -65,6 +66,9 @@ class SettingsView extends Component {
         <View style = {styles.container}>
           <Text style={styles.textStyle}>
             {durationMessage}
+          </Text>
+          <Text style={styles.smallText}>
+            {durationNote}
           </Text>
 
           <View style={{flexDirection: 'row', justifyContent: 'space-between'}}>
@@ -115,31 +119,43 @@ const styles = StyleSheet.create({
     justifyContent:'center',
     alignItems:'center'
   },
-  title: {
+  instructions: {
     paddingTop: 10,
-    fontSize: 20,
+    paddingLeft: 20,
+    paddingRight: 20,
+    fontSize: 25,
     textAlign: 'center',
-    margin: 0,
-    fontFamily: 'Iowan Old Style'
+    marginTop: 40,
+    fontFamily: 'Avenir'
   },
   textinput: {
     fontSize: 16,
     margin: 10,
     textAlign: 'center',
-    fontFamily: 'Iowan Old Style'
+    fontFamily: 'Avenir'
   },
   button: {
     fontSize : 16,
     margin: 10,
-    fontFamily: 'Iowan Old Style'
+    fontFamily: 'Avenir'
   },
   textStyle: {
-    fontFamily: 'Iowan Old Style',
-    fontSize: 20
-
+    fontFamily: 'Avenir',
+    fontSize: 23,
+    paddingLeft: 10,
+    paddingRight: 10,
+    textAlign: 'center'
+  },
+  smallText: {
+    fontFamily: 'Avenir',
+    fontSize: 18,
+    paddingLeft: 10,
+    paddingRight: 10,
+    marginBottom: 20,
+    textAlign: 'center'
   },
   textinputStyle: {
-    fontFamily: 'Iowan Old Style',
+    fontFamily: 'Avenir',
     textDecorationLine: "underline",
     textDecorationStyle: "solid",
     textDecorationColor: "#000"

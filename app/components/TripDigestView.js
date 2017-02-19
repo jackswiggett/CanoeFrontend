@@ -4,7 +4,9 @@ import {
   View,
   StyleSheet,
   TextInput,
-  Button
+  Button,
+  Image,
+  TouchableHighlight
 } from 'react-native';
 import TripSummary from './TripSummary';
 
@@ -16,10 +18,15 @@ const TripDigestView = function(props) {
 
   return (
     <View style = {{flex: 1}}>
-      <View style={styles.bg}>
+      <View style = {{flex: 1, height: 40, flexDirection: 'row', justifyContent: 'flex-start', marginRight: 20, alignItems: 'center', paddingTop: 20}}>
         <Text style={styles.viewName}>
-          Daily Trip Digest
+          Your Trips
         </Text>
+        <TouchableHighlight
+          onPress={() => props.showSettings()}>
+          <Image style={styles.settings}
+            source={require('../images/settings.png')} />
+        </TouchableHighlight>
       </View>
       <View style={styles.bg2}>
         { props.loading ?
@@ -46,10 +53,7 @@ const TripDigestView = function(props) {
 
 const styles = StyleSheet.create({
   bg: {
-    flex:1,
-    flexDirection:'column',
-    justifyContent : 'center',
-    alignItems: 'center'
+    flex: 1
   },
   bg2: {
     flex:10,
@@ -57,17 +61,25 @@ const styles = StyleSheet.create({
     justifyContent : 'center'
   },
   viewName: {
-    paddingTop: 30,
+    paddingTop: 10,
+    paddingBottom: 10,
+    paddingLeft: 5,
     margin: 10,
-    fontFamily: 'Iowan Old Style',
-    fontSize: 32,
-    alignItems: 'flex-end',
-    justifyContent: 'center'
+    fontFamily: 'Avenir',
+    fontSize: 35,
+    flex: 1
   },
   loading: {
     textAlign: 'center',
-    fontFamily: 'Iowan Old Style',
-    fontSize: 40
+    fontFamily: 'Avenir',
+    fontSize: 25,
+    margin: 20
+  },
+  settings: {
+    flex: 1,
+    width: 30,
+    height: 30,
+    resizeMode: 'contain'
   }
 });
 
