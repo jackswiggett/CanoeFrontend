@@ -203,7 +203,8 @@ export function fetchTripDigest(maxPrice, user, durations, userRatings) {
           dispatch(receiveTripDigest(json))
         })
         .catch(function(error) {
-          console.log("Error getting trip digest: " + error.message);
+          alert("Unable to find flights matching your query :(. Try adjusting the settings!");
+          dispatch(receiveTripDigest([]))
         });
   }
 }

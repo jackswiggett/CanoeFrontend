@@ -12,6 +12,12 @@ const mapDispatchToProps = (dispatch, ownProps) => {
   return {
     showTripDigestView: () => {
       dispatch(setCurrentView(Views.TRIP_DIGEST));
+    },
+    showSettings: () => {
+      dispatch(setCurrentView(Views.SETTINGS))
+    },
+    showTripDigest: () => {
+      dispatch(setCurrentView(Views.TRIP_DIGEST))
     }
   };
 };

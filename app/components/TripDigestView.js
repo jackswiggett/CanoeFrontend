@@ -15,21 +15,25 @@ const TripDigestView = function(props) {
   if (props.trips.length > 5) {
     trips = props.trips.slice(0, 5);
   }
-  var mapbutton = null
-  if(!props.loading) {
-    mapbutton = (<Button title="Map View" onPress={() => {props.showTripMapView();}}/>);
-  }
+
   return (
     <View style = {{flex: 1}}>
-      <View style = {{flex: 1, height: 40, flexDirection: 'row', justifyContent: 'flex-start', marginRight: 20, alignItems: 'center', paddingTop: 20}}>
+      <View style = {{flex: 0, height: 80, flexDirection: 'row', justifyContent: 'flex-start', marginRight: 20, alignItems: 'center', paddingTop: 20}}>
         <Text style={styles.viewName}>
           Your Trips
         </Text>
-        <TouchableHighlight
-          onPress={() => props.showSettings()}>
-          <Image style={styles.settings}
-            source={require('../images/settings.png')} />
-        </TouchableHighlight>
+        <View style={{flex: 0, width: 90, flexDirection:'row', justifyContent:'space-between'}}>
+          <TouchableHighlight
+            onPress={() => props.showTripMapView()}>
+            <Image style={styles.settings}
+              source={require('../images/map.png')} />
+          </TouchableHighlight>
+          <TouchableHighlight
+            onPress={() => props.showSettings()}>
+            <Image style={styles.settings}
+              source={require('../images/settings.png')} />
+          </TouchableHighlight>
+        </View>
       </View>
       <View style={styles.bg2}>
         { props.loading ?
@@ -49,7 +53,6 @@ const TripDigestView = function(props) {
             );
           })
         }
-      {mapbutton}
       </View>
     </View>
   );
@@ -62,7 +65,8 @@ const styles = StyleSheet.create({
   bg2: {
     flex:10,
     flexDirection:'column',
-    justifyContent : 'center'
+    justifyContent: 'center',
+    alignItems: 'stretch'
   },
   viewName: {
     paddingTop: 10,
@@ -71,19 +75,19 @@ const styles = StyleSheet.create({
     margin: 10,
     fontFamily: 'Avenir',
     fontSize: 35,
-    flex: 1
+    flex: 2
   },
   loading: {
     textAlign: 'center',
     fontFamily: 'Avenir',
-    fontSize: 25,
+    fontSize: 20,
     margin: 20
   },
   settings: {
-    flex: 1,
-    width: 30,
-    height: 30,
-    resizeMode: 'contain'
+    width: 32,
+    height: 32,
+    resizeMode: 'contain',
+    marginRight: 0
   }
 });
 

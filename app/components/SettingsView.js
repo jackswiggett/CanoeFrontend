@@ -6,7 +6,8 @@ import {
   TextInput,
   Button,
   TouchableOpacity,
-  Image
+  Image,
+  TouchableWithoutFeedback
 } from 'react-native';
 import NumberInput from './NumberInput';
 
@@ -47,58 +48,62 @@ class SettingsView extends Component {
       self.props.exit(self.state.maxPrice, "Francis", durations, self.props.userRatings);
     }
 
-    return (
-      <View style = {styles.bg}>
-        <View style = {styles.container}>
-          <Text style={styles.instructions}>
-            {introduction}
-          </Text>
-        </View>
-        <View style={styles.container}>
-          <Text style={styles.textStyle}>
-            {priceMessage}
-          </Text>
-          <NumberInput
-            style = {styles.textinputStyle}
-            value = {this.state.maxPrice}
-            onChangeValue = {(newValue) => this.setState({maxPrice: newValue})} />
-        </View>
-        <View style = {styles.container}>
-          <Text style={styles.textStyle}>
-            {durationMessage}
-          </Text>
-          <Text style={styles.smallText}>
-            {durationNote}
-          </Text>
+    const dismissKeyboard = require('dismissKeyboard');
 
-          <View style={{flexDirection: 'row', justifyContent: 'space-between'}}>
-            <TouchableOpacity>
-              <Button
-                style={styles.textStyle}
-                title="1-2 days"
-                onPress={() => toggleDuration(this, "short")}
-                color={this.state.durations.short ? "green" : "grey"} />
-              <Button
-                style={styles.textStyle}
-                title="3-6 days"
-                onPress={() => toggleDuration(this, "medium")}
-                color={this.state.durations.medium ? "green" : "grey"} />
-              {/*<Button
-                style={styles.textStyle}
-                title="1-3 weeks"
-                onPress={() => toggleDuration(this, "long")}
-                color={this.state.durations.long ? "green" : "grey"} />*/}
-              </TouchableOpacity> 
+    return (
+      <TouchableWithoutFeedback onPress={()=> dismissKeyboard()} >
+        <View style = {styles.bg}>
+          <View style = {styles.container}>
+            <Text style={styles.instructions}>
+              {introduction}
+            </Text>
+          </View>
+          <View style={styles.container}>
+            <Text style={styles.textStyle}>
+              {priceMessage}
+            </Text>
+            <NumberInput
+              style = {styles.textinputStyle}
+              value = {this.state.maxPrice}
+              onChangeValue = {(newValue) => this.setState({maxPrice: newValue})} />
+          </View>
+          <View style = {styles.container}>
+            <Text style={styles.textStyle}>
+              {durationMessage}
+            </Text>
+            <Text style={styles.smallText}>
+              {durationNote}
+            </Text>
+
+            <View style={{flexDirection: 'row', justifyContent: 'space-between'}}>
+              <TouchableOpacity>
+                <Button
+                  style={styles.textStyle}
+                  title="1-2 days"
+                  onPress={() => toggleDuration(this, "short")}
+                  color={this.state.durations.short ? "green" : "grey"} />
+                <Button
+                  style={styles.textStyle}
+                  title="3-6 days"
+                  onPress={() => toggleDuration(this, "medium")}
+                  color={this.state.durations.medium ? "green" : "grey"} />
+                {/*<Button
+                  style={styles.textStyle}
+                  title="1-3 weeks"
+                  onPress={() => toggleDuration(this, "long")}
+                  color={this.state.durations.long ? "green" : "grey"} />*/}
+                </TouchableOpacity> 
+            </View>
+          </View>
+          <View style = {styles.saveContainer}>
+            <Button
+              style={styles.textStyle}
+              title="Save Settings"
+              backgroundColor = "purple"
+              onPress={() => saveSettings(this)} />
           </View>
         </View>
-        <View style = {styles.saveContainer}>
-          <Button
-            style={styles.textStyle}
-            title="Save Settings"
-            backgroundColor = "purple"
-            onPress={() => saveSettings(this)} />
-        </View>
-      </View>
+      </TouchableWithoutFeedback>
     );
   }
 }
@@ -125,7 +130,7 @@ const styles = StyleSheet.create({
     paddingRight: 20,
     fontSize: 25,
     textAlign: 'center',
-    marginTop: 40,
+    marginTop: 20,
     fontFamily: 'Avenir'
   },
   textinput: {

@@ -60,7 +60,8 @@ const styles = StyleSheet.create({
     alignItems: 'stretch'
   },
   stars: {
-    flex: 1,
+    flex: -1,
+    width: 200,
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'stretch',

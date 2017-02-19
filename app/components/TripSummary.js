@@ -29,18 +29,28 @@ const TripSummary = function(props) {
 
 const styles = StyleSheet.create({
   tripSummary: {
-    margin: 10,
-    padding: 10,
-    flex: 1,
-    justifyContent: 'center'
+    flexDirection: 'column',
+    margin: 6,
+    marginLeft: 10,
+    marginRight: 10,
+    padding: 8,
+    paddingLeft: 12,
+    justifyContent: 'space-around',
+    alignItems: 'stretch',
+    backgroundColor: "#f4f8ff",
+    borderColor: "#efefef",
+    borderWidth: 2,
+    borderRadius: 10
   },
   container: {
     flex: 1,
-    alignItems: 'flex-start'
+    alignItems: 'stretch',
+    
   },
   name: {
     fontFamily: 'Avenir',
-    fontSize: 26
+    fontSize: 26,
+
   },
   duration: {
     fontFamily: 'Avenir',

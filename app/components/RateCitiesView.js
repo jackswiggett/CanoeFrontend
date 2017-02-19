@@ -44,11 +44,11 @@ class RateCitiesView extends Component {
           <Text style={styles.loadingMessage}>
             Loading destinations...
           </Text> :
-          this.props.destinations.slice(this.state.pageIndex * 5, this.state.pageIndex * 5 + 5).map(function(destination, index) {
+          this.props.destinations.slice(this.state.pageIndex * 4, this.state.pageIndex * 4 + 4).map(function(destination, index) {
             return (
               <DestinationRating
                 destinationName={destination.city}
-                key={self.state.pageIndex * 5 + index}
+                key={self.state.pageIndex * 4 + index}
                 ratingChanged={(rating) => self.props.rateDestination(destination.destination, rating)} />
             );
           })
@@ -82,7 +82,8 @@ const styles = StyleSheet.create({
     fontSize: 18,
     textAlign: 'center',
     margin: 20,
-    fontFamily: 'Avenir'
+    fontFamily: 'Avenir',
+    flex: 3,
   },
   instructions: {
     fontSize: 20,

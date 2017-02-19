@@ -4,7 +4,8 @@ import {
   View,
   StyleSheet,
   TextInput,
-  Button
+  Button,
+  TouchableWithoutFeedback
 } from 'react-native';
 
 
@@ -23,35 +24,40 @@ class LoginView extends Component {
 
       return true;
     }
+
+    const dismissKeyboard = require('dismissKeyboard');
+
     return (
-      <View style = {styles.bg}>
-        <View style ={styles.titleContainer}>
-          <Text style={styles.viewName}>
-            Canoe
-          </Text>
-        </View>
-        <View style = {styles.inputContainer}>
-          <TextInput
-            style= {styles.textinput}
-            placeholder= "username"
-            onChangeText={(text) => this.props.setUserId(text)}
-            value={this.props.userId} />
-        </View>
+      <TouchableWithoutFeedback onPress={()=> dismissKeyboard()} >
+        <View style = {styles.bg}>
+          <View style ={styles.titleContainer}>
+            <Text style={styles.viewName}>
+              Canoe
+            </Text>
+          </View>
+          <View style = {styles.inputContainer}>
+              <TextInput
+                style= {styles.textinput}
+                placeholder= "username"
+                onChangeText={(text) => this.props.setUserId(text)}
+                value={this.props.userId} />
+            </View>
 
-        <View style = {styles.nextContainer}>
-         <Button
-         containerStyle={{padding:10, height:45, overflow:'hidden', borderRadius:4, backgroundColor: 'black'}}
-            style= {styles.button}
-            title = "Continue >"
-            onPress = {() => {
-              if (validateUsername(this.props.userId)) {
-                this.props.loginClicked();
-              }
-            }} />
+          <View style = {styles.nextContainer}>
+           <Button
+           containerStyle={{padding:10, height:45, overflow:'hidden', borderRadius:4, backgroundColor: 'black'}}
+              style= {styles.button}
+              title = "Begin"
+              onPress = {() => {
+                if (validateUsername(this.props.userId)) {
+                  this.props.loginClicked();
+                }
+              }} />
+
+          </View>
 
         </View>
-
-      </View>
+      </TouchableWithoutFeedback>
     );
   }
 }
@@ -63,13 +69,13 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
   titleContainer: {
-    flex: 3,
+    flex: 1,
     justifyContent: 'center',
     alignItems:'center'
   },
   inputContainer: {
     flex: 1,
-    justifyContent: 'flex-end',
+    justifyContent: 'center',
     alignItems: 'center'
   },
   nextContainer: {
@@ -78,8 +84,8 @@ const styles = StyleSheet.create({
     alignItems:'center'
   },
   viewName: {
-    fontSize: 60,
-    fontFamily: 'Avenir'
+    fontSize: 80,
+    fontFamily: 'Optima'
   },
   textinput: {
     fontSize: 25,
