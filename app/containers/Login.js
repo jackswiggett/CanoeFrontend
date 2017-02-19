@@ -1,3 +1,4 @@
+import fetch from 'isomorphic-fetch';
 import { connect } from 'react-redux';
 import LoginView from '../components/LoginView';
 import { setUserId, setCurrentView, Views }  from '../actions.js';
