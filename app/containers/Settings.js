@@ -11,7 +11,8 @@ import {
 const mapStateToProps = (state, ownProps) => {
   return {
     userId: state.userId,
-    maxPrice: state.maxPrice
+    maxPrice: state.maxPrice,
+    userRatings: state.userRatings
   };
 };
 
@@ -23,9 +24,9 @@ const mapDispatchToProps = (dispatch, ownProps) => {
     setTripDurations: (short, medium, long) => {
       dispatch(setTripDurations(short, medium, long));
     },
-    exit: (maxPrice, user, duration) => {
-
-      dispatch(fetchTripDigest(maxPrice, user, duration));
+    exit: (maxPrice, user, durations, userRatings) => {
+      console.log(userRatings);
+      dispatch(fetchTripDigest(maxPrice, user, durations, userRatings));
       dispatch(setCurrentView(Views.TRIP_DIGEST))
     }
   };

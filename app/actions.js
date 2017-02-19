@@ -60,7 +60,7 @@ export const Views = {
   SETTINGS: "SETTINGS"
 };
 
-const FETCH_TRIP_DIGEST_ENDPOINT = "http://canoes.azurewebsites.net/flightquery/";
+const FETCH_TRIP_DIGEST_ENDPOINT = "http://canoes.azurewebsites.net/flightquerylocations/";
 const FETCH_TRIP_DIGEST_ORIGIN = "SFO"; // TODO: find current location rather than hard-coding
 
 const FETCH_TOP_DESTINATIONS_ENDPOINT = "http://canoes.azurewebsites.net/topdest/?period=2016-12&number_of_results=30" +
@@ -130,7 +130,7 @@ export function receiveTripDigest(json) {
   };
 }
 
-export function fetchTripDigest(maxPrice, user, duration) {
+export function fetchTripDigest(maxPrice, user, durations, userRatings) {
   return function(dispatch) {
     dispatch(requestTripDigest());
 
@@ -153,25 +153,48 @@ export function fetchTripDigest(maxPrice, user, duration) {
 
     // Format the trip duration range
     let durationRange;
-    switch (duration) {
-      case "short":
-        durationRange = "1--2";
-      case "medium":
-        durationRange = "3--6";
-      case "long":
-        durationRange = "7--21";
-      default:
-        // default to one week or less
-        durationRange = "1--7";
+    console.log(durations);
+    if (durations.short && !durations.medium) {
+      durationRange = "1--2";
+    } else if (durations.medium && !durations.short) {
+      durationRange = "3--6";
+    } else {
+      console.log("def");
+      durationRange = "1--6";
     }
 
-    return fetch(
-      FETCH_TRIP_DIGEST_ENDPOINT +
+    var locations = [];
+
+    var location;
+
+    for (location in userRatings) {
+      if (userRatings[location] > 3) {
+        locations.push(location);
+      }
+    }
+
+    var headers = new Headers();
+    headers.append("Content-Type", "application/json");
+
+    const init = {
+      method: 'POST',
+      body: JSON.stringify({
+        locations: locations
+      }),
+      headers: headers
+    };
+
+    const url = FETCH_TRIP_DIGEST_ENDPOINT +
       "?origin=" + FETCH_TRIP_DIGEST_ORIGIN +
       "&max_price=" + maxPrice +
       "&departure_date=" + dateRange +
-      "&user=" + user +
-      "&duration=" + durationRange)
+      //"&user=" + user +
+      "&duration=" + durationRange;
+
+    console.log(url);
+    console.log(init.body);
+
+    return fetch(url, init)
         .then(response => {
           return response.json();
         })

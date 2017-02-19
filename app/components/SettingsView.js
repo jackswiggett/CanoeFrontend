@@ -42,7 +42,7 @@ class SettingsView extends Component {
       self.props.setTripDurations(durations.short, durations.medium, durations.long);
 
       // return to Trip Digest
-      self.props.exit(self.state.maxPrice, "Francis", "short");
+      self.props.exit(self.state.maxPrice, "Francis", durations, self.props.userRatings);
     }
 
     return (
@@ -79,11 +79,11 @@ class SettingsView extends Component {
                 title="3-6 days"
                 onPress={() => toggleDuration(this, "medium")}
                 color={this.state.durations.medium ? "green" : "grey"} />
-              <Button
+              {/*<Button
                 style={styles.textStyle}
                 title="1-3 weeks"
                 onPress={() => toggleDuration(this, "long")}
-                color={this.state.durations.long ? "green" : "grey"} />
+                color={this.state.durations.long ? "green" : "grey"} />*/}
               </TouchableOpacity> 
           </View>
         </View>
