@@ -15,7 +15,12 @@ import 'whatwg-fetch';
     items: [...], // list of javascript objects representing possible trips, as returned by API
     lastUpdated: 1439478405547
   },
-  tripDetailsIndex: 1 // index of trip currently shown in the TripDetails view
+  tripDetailsIndex: 1, // index of trip currently shown in the TripDetails view
+  topDestinations: {
+    isFetching: false,
+    items: [...],
+    lastUpdated: 1439478405547
+  }
 }
 */
 
@@ -32,7 +37,10 @@ export const SET_TRIP_DETAILS_INDEX = "SET_TRIP_DETAILS_INDEX";
 // HTTP Request actions
 export const REQUEST_TRIP_DIGEST = "REQUEST_TRIP_DIGEST";
 export const RECEIVE_TRIP_DIGEST = "RECEIVE_TRIP_DIGEST";
-// TODO: action on error when requestion trip digest
+// TODO: action on error when requesting trip digest
+
+export const REQUEST_TOP_DESTINATIONS = "REQUEST_TOP_DESTINATIONS";
+export const RECEIVE_TOP_DESTINATIONS = "RECEIVE_TOP_DESTINATIONS";
 
 /*
  * other constants
@@ -48,6 +56,9 @@ export const Views = {
 
 const FETCH_TRIP_DIGEST_ENDPOINT = "http://canoes.azurewebsites.net/flightquery/";
 const FETCH_TRIP_DIGEST_ORIGIN = "SFO"; // TODO: find current location rather than hard-coding
+
+const FETCH_TOP_DESTINATIONS_ENDPOINT = "https://api.sandbox.amadeus.com/v1.2/travel-intelligence/top-destinations" +
+  "?apikey=FGLK9nvwmMxzU5KKktAaLTjfx7D3NWZf&period=2016-12&origin=SFO&number_of_results=30"
 
 /*
  * action creators
@@ -159,4 +170,34 @@ export function fetchTripDigest(maxPrice, user, duration) {
   }
 }
 
+export function requestTopDestinations() {
+  return {
+    type: REQUEST_TOP_DESTINATIONS
+  };
+}
+
+export function receiveTopDestinations(json) {
+  return {
+    type: RECEIVE_TOP_DESTINATIONS,
+    items: json,
+    receivedAt: Date.now()
+  };
+}
+
+export function fetchTopDestinations() {
+  return function(dispatch) {
+    dispatch(requestTopDestinations());
+
+    return fetch(FETCH_TOP_DESTINATIONS_ENDPOINT)
+      .then(response => {
+        return response.json();
+      })
+      .then(json => {
+        dispatch(receiveTopDestinations(json))
+      })
+      .catch(function(error) {
+        console.log("Error getting top destinations: " + error.message);
+      });
+  }
+}
 

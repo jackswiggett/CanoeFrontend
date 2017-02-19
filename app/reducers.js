@@ -7,6 +7,8 @@ import {
   REQUEST_TRIP_DIGEST,
   RECEIVE_TRIP_DIGEST,
   SET_TRIP_DETAILS_INDEX,
+  REQUEST_TOP_DESTINATIONS,
+  RECEIVE_TOP_DESTINATIONS,
   Views
 } from './actions';
 const { LOGIN } = Views;
@@ -60,12 +62,12 @@ function tripDetailsIndex(state = 0, action) {
   }
 }
 
-const defaultTripDigest = {
+const defaultAPIData = {
   isFetching: false,
   items: []
 }
 
-function tripDigest(state = defaultTripDigest, action) {
+function tripDigest(state = defaultAPIData, action) {
   switch (action.type) {
     case REQUEST_TRIP_DIGEST:
       return Object.assign({}, state, {
@@ -82,13 +84,31 @@ function tripDigest(state = defaultTripDigest, action) {
   }
 }
 
+function topDestinations(state = defaultAPIData, action) {
+  switch (action.type) {
+    case REQUEST_TOP_DESTINATIONS:
+      return Object.assign({}, state, {
+        isFetching: true
+      });
+    case RECEIVE_TOP_DESTINATIONS:
+      return Object.assign({}, state, {
+        isFetching: false,
+        items: action.items,
+        lastUpdated: action.receivedAt
+      });
+    default:
+      return state;
+  }
+}
+
 const canoeApp = combineReducers({
   currentView,
   userId,
   maxPrice,
   tripDurations,
   tripDigest,
-  tripDetailsIndex
+  tripDetailsIndex,
+  topDestinations
 });
 
 export default canoeApp;

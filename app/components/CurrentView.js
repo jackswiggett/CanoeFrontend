@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Component } from 'react';
 import {
   Text,
   View,
@@ -10,36 +10,43 @@ import Settings from '../containers/Settings';
 import TripDigest from '../containers/TripDigest';
 import TripDetails from '../containers/TripDetails';
 
-const CurrentView = function(props) {
-  switch (props.currentView) {
-    case "LOGIN":
-      return (
-        <Login />
-      );
-    case "RATE_CITIES":
-      return (
-        <RateCities />
-      );
-    case "SETTINGS":
-      return (
-        <Settings />
-      );
-    case "TRIP_DIGEST":
-      return (
-        <TripDigest />
-      );
-    case "TRIP_DETAILS":
-      return (
-        <TripDetails />
-      );
-    default:
-      return (
-        <View>
-          <Text style={styles.viewName}>
-            View {props.currentView} is not implemented.
-          </Text>
-        </View>
-      );
+class CurrentView extends Component {
+  constructor(props) {
+    super(props);
+    props.fetchTopDestinations();
+  }
+
+  render(props) {
+    switch (this.props.currentView) {
+      case "LOGIN":
+        return (
+          <Login />
+        );
+      case "RATE_CITIES":
+        return (
+          <RateCities />
+        );
+      case "SETTINGS":
+        return (
+          <Settings />
+        );
+      case "TRIP_DIGEST":
+        return (
+          <TripDigest />
+        );
+      case "TRIP_DETAILS":
+        return (
+          <TripDetails />
+        );
+      default:
+        return (
+          <View>
+            <Text style={styles.viewName}>
+              View {this.props.currentView} is not implemented.
+            </Text>
+          </View>
+        );
+    }
   }
 }
 

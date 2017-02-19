@@ -6,8 +6,6 @@ import {
   TextInput,
   Button
 } from 'react-native';
-import AwesomeButton from 'react-native-awesome-button';
-
 
 
 class LoginView extends Component {

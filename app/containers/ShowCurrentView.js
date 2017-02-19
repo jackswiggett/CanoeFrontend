@@ -1,6 +1,6 @@
 import { connect } from 'react-redux';
-//import { setVisibilityFilter } from '../actions';
 import CurrentView from '../components/CurrentView';
+import { fetchTopDestinations } from '../actions.js';
 
 const mapStateToProps = (state, ownProps) => {
   return {
@@ -9,11 +9,11 @@ const mapStateToProps = (state, ownProps) => {
 };
 
 const mapDispatchToProps = (dispatch, ownProps) => {
-  return {};
-/*    onClick: () => {
-      dispatch(setVisibilityFilter(ownProps.filter))
+  return {
+    fetchTopDestinations: () => {
+      dispatch(fetchTopDestinations());
     }
-  };*/
+  };
 };
 
 const ShowCurrentView = connect(
