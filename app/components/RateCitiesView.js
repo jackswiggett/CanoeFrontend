@@ -4,27 +4,34 @@ import {
   View,
   StyleSheet,
   TextInput,
-  Button
+  Button,
+  ListView
 } from 'react-native';
 
 const RateCitiesView = function(props) {
   return (
-    <View>
+    <View>  
 
-      <Text style={styles.viewName}>
-        {props.userId}
-      </Text>
+      <Text> Pick at least 5 cities that interest you! </Text>
+
+      <ListView
+        style = {styles.lv}
+        dataSource = {this.props.getPopularCities}
+        renderRow = {(rowData) => <Text> {rowData} </Text>} />
+
+      <Button 
+        style={styles.button}
+        onPress = {this.props.citiesSelected}/>
 
     </View>
   );
 }
 
 const styles = StyleSheet.create({
-  viewName: {
-    paddingTop:10,
+  lv: {
+    flex:1,
     fontSize: 20,
     textAlign: 'center',
-    margin: 10,
   },
   textinput: {
     fontSize: 16,
@@ -32,8 +39,7 @@ const styles = StyleSheet.create({
     textAlign: 'center',
   },
   button: {
-    fontSize : 16,
-    margin: 10
+    fontSize : 16
   }
 });
 

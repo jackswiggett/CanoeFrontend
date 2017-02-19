@@ -1,9 +1,12 @@
+import fetch from 'isomorphic-fetch';
+
 /*
  * action types
  */
 
 export const SET_CURRENT_VIEW = "SET_CURRENT_VIEW";
 export const SET_USER_ID = "SET_USER_ID";
+export const GET_POPULAR_CITIES = "GET_POPULAR_CITIES";
 
 /*
  * other constants
@@ -32,5 +35,12 @@ export function setUserId(userID){
 	return {
     type: SET_USER_ID,
     id: userID
+  };
+}
+
+export function getPopularCities(){
+  return{
+    type: GET_POPULAR_CITIES,
+   // popularCities: 
   };
 }
