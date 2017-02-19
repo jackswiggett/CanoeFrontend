@@ -15,15 +15,18 @@ const TripDetailsView = function(props) {
       </Text>
       <View style={styles.imageview}>
         <Image source={{uri: 'https://facebook.github.io/react/img/logo_og.png'}}
-       style={{width: 400, height: 400}} />
+       style={{flex:3}} />
       </View>
     <View style = {styles.infocontainer}>
-      <Text>
-        {props.startDate} - {props.endDate}
+      <Text style={styles.textStyle}>
+        Departure: {props.startDate}
+      </Text>
+      <Text style={styles.textStyle}>
+        Return: {props.endDate}
       </Text>
 
-      <Text>
-        ${props.price}
+      <Text style={styles.textStyle}>
+        Cost: ${props.price}
       </Text>
     </View>
 
@@ -40,6 +43,7 @@ const styles = StyleSheet.create({
     fontSize: 32,
     textAlign: 'center',
     margin: 10,
+    fontFamily: 'Iowan Old Style'
   },
   button: {
     fontSize : 16,
@@ -53,8 +57,13 @@ const styles = StyleSheet.create({
     flex:3
   },
   infocontainer: {
-    flex:3,
-    justifyContent : 'center'
+    flex:2,
+    justifyContent : 'space-around',
+    alignItems: 'center'
+  },
+  textStyle: {
+    fontSize:24,
+    fontFamily: 'Iowan Old Style'
   }
 });
 
