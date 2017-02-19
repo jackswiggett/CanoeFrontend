@@ -1,10 +1,12 @@
 import { connect } from 'react-redux';
 import RateCitiesView from '../components/RateCitiesView';
-import { setCurrentView, Views }  from '../actions.js';
+import { rateDestination, setCurrentView, Views }  from '../actions.js';
 
 const mapStateToProps = (state, ownProps) => {
   return {
-    userId: state.userId
+    userId: state.userId,
+    loading: state.topDestinations.isFetching,
+    destinations: state.topDestinations.items
   };
 };
 
@@ -12,6 +14,9 @@ const mapDispatchToProps = (dispatch, ownProps) => {
   return {
     continue: () => {
       dispatch(setCurrentView(Views.SETTINGS))
+    },
+    rateDestination: (destination, rating) => {
+      dispatch(rateDestination(destination, rating))
     }
   };
 };

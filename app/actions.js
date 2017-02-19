@@ -20,6 +20,11 @@ import 'whatwg-fetch';
     isFetching: false,
     items: [...],
     lastUpdated: 1439478405547
+  },
+  userRatings: {
+    "SFO": 4,
+    "SEA": 5,
+    "NYC": 3
   }
 }
 */
@@ -33,6 +38,7 @@ export const SET_USER_ID = "SET_USER_ID";
 export const SET_MAX_PRICE = "SET_MAX_PRICE";
 export const SET_TRIP_DURATIONS = "SET_TRIP_DURATIONS";
 export const SET_TRIP_DETAILS_INDEX = "SET_TRIP_DETAILS_INDEX";
+export const RATE_DESTINATION = "RATE_DESTINATION";
 
 // HTTP Request actions
 export const REQUEST_TRIP_DIGEST = "REQUEST_TRIP_DIGEST";
@@ -57,8 +63,8 @@ export const Views = {
 const FETCH_TRIP_DIGEST_ENDPOINT = "http://canoes.azurewebsites.net/flightquery/";
 const FETCH_TRIP_DIGEST_ORIGIN = "SFO"; // TODO: find current location rather than hard-coding
 
-const FETCH_TOP_DESTINATIONS_ENDPOINT = "https://api.sandbox.amadeus.com/v1.2/travel-intelligence/top-destinations" +
-  "?apikey=FGLK9nvwmMxzU5KKktAaLTjfx7D3NWZf&period=2016-12&origin=SFO&number_of_results=30"
+const FETCH_TOP_DESTINATIONS_ENDPOINT = "http://canoes.azurewebsites.net/topdest/?period=2016-12&number_of_results=30" +
+  "&origin=" + FETCH_TRIP_DIGEST_ORIGIN;
 
 /*
  * action creators
@@ -99,6 +105,14 @@ export function setTripDetailsIndex(index) {
   return {
     type: SET_TRIP_DETAILS_INDEX,
     index: index
+  };
+}
+
+export function rateDestination(destination, rating) {
+  return {
+    type: RATE_DESTINATION,
+    destination: destination,
+    rating: rating
   };
 }
 
@@ -193,7 +207,7 @@ export function fetchTopDestinations() {
         return response.json();
       })
       .then(json => {
-        dispatch(receiveTopDestinations(json))
+        dispatch(receiveTopDestinations(json));
       })
       .catch(function(error) {
         console.log("Error getting top destinations: " + error.message);

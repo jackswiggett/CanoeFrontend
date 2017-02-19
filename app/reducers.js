@@ -9,6 +9,7 @@ import {
   SET_TRIP_DETAILS_INDEX,
   REQUEST_TOP_DESTINATIONS,
   RECEIVE_TOP_DESTINATIONS,
+  RATE_DESTINATION,
   Views
 } from './actions';
 const { LOGIN } = Views;
@@ -63,7 +64,7 @@ function tripDetailsIndex(state = 0, action) {
 }
 
 const defaultAPIData = {
-  isFetching: false,
+  isFetching: true,
   items: []
 }
 
@@ -101,6 +102,17 @@ function topDestinations(state = defaultAPIData, action) {
   }
 }
 
+function userRatings(state = {}, action) {
+  switch (action.type) {
+    case RATE_DESTINATION:
+      const newRatings = Object.assign({}, state);
+      newRatings[action.destination] = action.rating;
+      return newRatings;
+    default:
+      return state;
+  }
+}
+
 const canoeApp = combineReducers({
   currentView,
   userId,
@@ -108,7 +120,8 @@ const canoeApp = combineReducers({
   tripDurations,
   tripDigest,
   tripDetailsIndex,
-  topDestinations
+  topDestinations,
+  userRatings
 });
 
 export default canoeApp;
