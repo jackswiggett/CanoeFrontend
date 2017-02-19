@@ -4,7 +4,8 @@ import {
   View,
   StyleSheet,
   TextInput,
-  Button
+  Button,
+  TouchableOpacity
 } from 'react-native';
 import NumberInput from './NumberInput';
 
@@ -45,62 +46,103 @@ class SettingsView extends Component {
     }
 
     return (
-      <View>
-        <Text style={styles.title}>
-          Hi, {this.props.userId}! {introduction}
-        </Text>
-
-        <Text>
-          {priceMessage}
-        </Text>
-
-        <NumberInput
-          value = {this.state.maxPrice}
-          onChangeValue = {(newValue) => this.setState({maxPrice: newValue})} />
-
-        <Text>
-          {durationMessage}
-        </Text>
-
-        <View style={{flexDirection: 'row', justifyContent: 'space-between'}}>
-          <Button
-            title="1-2 days"
-            onPress={() => toggleDuration(this, "short")}
-            color={this.state.durations.short ? "blue" : "black"} />
-          <Button
-            title="3-6 days"
-            onPress={() => toggleDuration(this, "medium")}
-            color={this.state.durations.medium ? "blue" : "black"} />
-          <Button
-            title="1-3 weeks"
-            onPress={() => toggleDuration(this, "long")}
-            color={this.state.durations.long ? "blue" : "black"} />
+      <View style = {styles.bg}>
+        <View style = {styles.container}>
+          <Text style={styles.title}>
+            Hi, {this.props.userId}! {introduction}
+          </Text>
         </View>
+        <View style={styles.container}>
+          <Text style={styles.textStyle}>
+            {priceMessage}
+          </Text>
 
-        <Button
-          title="Save Settings"
-          onPress={() => saveSettings(this)} />
+          <NumberInput
+            style = {styles.textinputStyle}
+            value = {this.state.maxPrice}
+            onChangeValue = {(newValue) => this.setState({maxPrice: newValue})} />
+        </View>
+        <View style = {styles.container}>
+          <Text style={styles.textStyle}>
+            {durationMessage}
+          </Text>
 
+          <View style={{flexDirection: 'row', justifyContent: 'space-between'}}>
+            <TouchableOpacity>
+              <Button
+                style={styles.textStyle}
+                title="1-2 days"
+                onPress={() => toggleDuration(this, "short")}
+                color={this.state.durations.short ? "grey" : "green"} />
+              <Button
+                style={styles.textStyle}
+                title="3-6 days"
+                onPress={() => toggleDuration(this, "medium")}
+                color={this.state.durations.medium ? "grey" : "green"} />
+              <Button
+                style={styles.textStyle}
+                title="1-3 weeks"
+                onPress={() => toggleDuration(this, "long")}
+                color={this.state.durations.long ? "grey" : "green"} />
+              </TouchableOpacity> 
+          </View>
+        </View>
+        <View style = {styles.saveContainer}>
+          <Button
+            style={styles.textStyle}
+            title="Save Settings"
+            backgroundColor = "purple"
+            onPress={() => saveSettings(this)} />
+        </View>
       </View>
     );
   }
 }
 
 const styles = StyleSheet.create({
+  bg: {
+    flex: 1,
+    flexDirection: 'column',
+    justifyContent: 'center'
+  },
+  container: {
+    flex:2,
+    justifyContent:'center',
+    alignItems:'center'
+  },
+  saveContainer: {
+    flex:1,
+    justifyContent:'center',
+    alignItems:'center'
+  },
   title: {
     paddingTop: 10,
     fontSize: 20,
     textAlign: 'center',
     margin: 0,
+    fontFamily: 'Iowan Old Style'
   },
   textinput: {
     fontSize: 16,
     margin: 10,
     textAlign: 'center',
+    fontFamily: 'Iowan Old Style'
   },
   button: {
     fontSize : 16,
-    margin: 10
+    margin: 10,
+    fontFamily: 'Iowan Old Style'
+  },
+  textStyle: {
+    fontFamily: 'Iowan Old Style',
+    fontSize: 20
+
+  },
+  textinputStyle: {
+    fontFamily: 'Iowan Old Style',
+    textDecorationLine: "underline",
+    textDecorationStyle: "solid",
+    textDecorationColor: "#000"
   }
 });
 

@@ -22,10 +22,13 @@ const NumberInput = function(props) {
 
 const styles = StyleSheet.create({
   numberInput: {
-    fontSize: 16,
+    fontSize: 32,
     margin: 10,
     height: 40,
     textAlign: 'center',
+    textDecorationLine: 'underline',
+    textDecorationStyle: 'solid',
+    textDecorationColor: '#ffffff'
   }
 });
 

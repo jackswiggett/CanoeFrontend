@@ -9,7 +9,7 @@ import ShowCurrentView from '../containers/ShowCurrentView';
 
 const App = function() {
   return (
-    <View>
+    <View style = {{flex:1}}>
       <ShowCurrentView />
     </View>
   );
