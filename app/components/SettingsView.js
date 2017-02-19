@@ -73,17 +73,17 @@ class SettingsView extends Component {
                 style={styles.textStyle}
                 title="1-2 days"
                 onPress={() => toggleDuration(this, "short")}
-                color={this.state.durations.short ? "grey" : "green"} />
+                color={this.state.durations.short ? "green" : "grey"} />
               <Button
                 style={styles.textStyle}
                 title="3-6 days"
                 onPress={() => toggleDuration(this, "medium")}
-                color={this.state.durations.medium ? "grey" : "green"} />
+                color={this.state.durations.medium ? "green" : "grey"} />
               <Button
                 style={styles.textStyle}
                 title="1-3 weeks"
                 onPress={() => toggleDuration(this, "long")}
-                color={this.state.durations.long ? "grey" : "green"} />
+                color={this.state.durations.long ? "green" : "grey"} />
               </TouchableOpacity> 
           </View>
         </View>
