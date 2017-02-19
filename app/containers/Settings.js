@@ -1,6 +1,6 @@
 import { connect } from 'react-redux';
 import SettingsView from '../components/SettingsView';
-import { setMaxPrice, setTripDurations }  from '../actions.js';
+import { setMaxPrice, setTripDurations, setCurrentView, Views }  from '../actions.js';
 
 const mapStateToProps = (state, ownProps) => {
   return {
@@ -16,6 +16,9 @@ const mapDispatchToProps = (dispatch, ownProps) => {
     },
     setTripDurations: (short, medium, long) => {
       dispatch(setTripDurations(short, medium, long));
+    },
+    exit: () => {
+      dispatch(setCurrentView(Views.TRIP_DIGEST))
     }
   };
 };

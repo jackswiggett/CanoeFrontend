@@ -7,6 +7,7 @@ import {
 import Login from '../containers/Login';
 import RateCities from '../containers/RateCities';
 import Settings from '../containers/Settings';
+import TripDigest from '../containers/TripDigest';
 
 const CurrentView = function(props) {
   switch (props.currentView) {
@@ -21,6 +22,10 @@ const CurrentView = function(props) {
     case "SETTINGS":
       return (
         <Settings />
+      );
+    case "TRIP_DIGEST":
+      return (
+        <TripDigest />
       );
     default:
       return (

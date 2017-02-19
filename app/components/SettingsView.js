@@ -39,6 +39,9 @@ class SettingsView extends Component {
 
       const durations = self.state.durations;
       self.props.setTripDurations(durations.short, durations.medium, durations.long);
+
+      // return to Trip Digest
+      self.props.exit();
     }
 
     return (

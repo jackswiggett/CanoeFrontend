@@ -13,6 +13,15 @@ class LoginView extends Component {
   }
 
   render() {
+    function validateUsername(username) {
+      if (username.length < 6 || /[^A-Za-z0-9]/.test(username)) {
+        alert("Your username must be at least 6 characters long, and must contain only capital " +
+              "or lowercase letters and numbers.")
+        return false;
+      }
+
+      return true;
+    }
     return (
       <View>
 
@@ -29,7 +38,11 @@ class LoginView extends Component {
         <Button
           style= {styles.button}
           title = "Next"
-          onPress = {this.props.loginClicked} />
+          onPress = {() => {
+            if (validateUsername(this.props.userId)) {
+              this.props.loginClicked();
+            }
+          }} />
 
       </View>
     );

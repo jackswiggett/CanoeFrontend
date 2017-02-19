@@ -15,6 +15,9 @@ const RateCitiesView = function(props) {
         {props.userId}
       </Text>
 
+      <Button
+        title="Continue"
+        onPress = {() => props.continue()} />
     </View>
   );
 }
