@@ -10,6 +10,8 @@
     "es6-promise": "^4.0.5",
     "react": "15.4.2",
     "react-native": "0.41.2",
+    "react-native-awesome-button": "^1.6.0",
+    "react-native-button": "^1.8.2",
     "react-redux": "^5.0.2",
     "redux": "^3.6.0",
     "redux-logger": "^2.8.1",

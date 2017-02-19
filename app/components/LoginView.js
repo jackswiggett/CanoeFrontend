@@ -6,6 +6,9 @@ import {
   TextInput,
   Button
 } from 'react-native';
+import AwesomeButton from 'react-native-awesome-button';
+
+
 
 class LoginView extends Component {
   constructor(props) {
@@ -23,26 +26,32 @@ class LoginView extends Component {
       return true;
     }
     return (
-      <View>
+      <View style = {styles.bg}>
+        <View style ={styles.titleContainer}>
+          <Text style={styles.viewName}>
+            Canoe
+          </Text>
+        </View>
+        <View style = {styles.inputContainer}>
+          <TextInput
+            style= {styles.textinput}
+            placeholder= "username"
+            onChangeText={(text) => this.props.setUserId(text)}
+            value={this.props.userId} />
+        </View>
 
-        <Text style={styles.viewName}>
-          Login View
-        </Text>
+        <View style = {styles.nextContainer}>
+         <Button
+         containerStyle={{padding:10, height:45, overflow:'hidden', borderRadius:4, backgroundColor: 'black'}}
+            style= {styles.button}
+            title = "Continue >"
+            onPress = {() => {
+              if (validateUsername(this.props.userId)) {
+                this.props.loginClicked();
+              }
+            }} />
 
-        <TextInput
-          style= {styles.textinput}
-          placeholder= "username"
-          onChangeText={(text) => this.props.setUserId(text)}
-          value={this.props.userId} />
-
-        <Button
-          style= {styles.button}
-          title = "Next"
-          onPress = {() => {
-            if (validateUsername(this.props.userId)) {
-              this.props.loginClicked();
-            }
-          }} />
+        </View>
 
       </View>
     );
@@ -50,21 +59,39 @@ class LoginView extends Component {
 }
 
 const styles = StyleSheet.create({
+  bg: {
+    flex: 1,
+    flexDirection: 'column',
+    justifyContent: 'center',
+  },
+  titleContainer: {
+    flex: 3,
+    justifyContent: 'center',
+    alignItems:'center'
+  },
+  inputContainer: {
+    flex: 1,
+    justifyContent: 'flex-end',
+    alignItems: 'center'
+  },
+  nextContainer: {
+    flex:1,
+    justifyContent: 'center',
+    alignItems:'center'
+  },
   viewName: {
-    paddingTop:10,
-    fontSize: 20,
-    textAlign: 'center',
-    margin: 10,
+    fontSize: 60,
+    fontFamily: 'Iowan Old Style'
   },
   textinput: {
-    fontSize: 16,
-    margin: 10,
+    fontSize: 25,
     textAlign: 'center',
     height: 40
+
   },
   button: {
-    fontSize : 16,
-    margin: 10
+    fontSize : 25,
+  //  justifyContent: 'flex-end'
   }
 });
 
