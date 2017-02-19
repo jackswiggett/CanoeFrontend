@@ -20,6 +20,10 @@ import App from './app/components/App'
 
 let store = createStore(canoeApp);
 
+let unsubscribe = store.subscribe(() =>
+  console.log(store.getState())
+)
+
 
 export default class Canoe extends Component {
   render() {

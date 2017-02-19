@@ -6,6 +6,7 @@ import {
 } from 'react-native';
 import Login from '../containers/Login';
 import RateCities from '../containers/RateCities';
+import Settings from '../containers/Settings';
 
 const CurrentView = function(props) {
   switch (props.currentView) {
@@ -16,6 +17,10 @@ const CurrentView = function(props) {
     case "RATE_CITIES":
       return (
         <RateCities />
+      );
+    case "SETTINGS":
+      return (
+        <Settings />
       );
     default:
       return (

@@ -1,5 +1,11 @@
 import { combineReducers } from 'redux';
-import { SET_CURRENT_VIEW, SET_USER_ID, Views } from './actions';
+import {
+  SET_CURRENT_VIEW,
+  SET_USER_ID,
+  SET_MAX_PRICE,
+  SET_TRIP_DURATIONS,
+  Views
+} from './actions';
 const { LOGIN } = Views
 
 /*export default function canoeApp(state = initialState, action) {
@@ -31,6 +37,28 @@ function userId(state = '', action){
   }
 }
 
+function maxPrice(state = 200, action) {
+  switch (action.type) {
+    case SET_MAX_PRICE:
+      return action.maxPrice;
+    default:
+      return state;
+  }
+}
+
+function tripDurations(state = {short: true, medium: true, long: true}, action) {
+  switch (action.type) {
+    case SET_TRIP_DURATIONS:
+      return {
+        short: action.short,
+        medium: action.medium,
+        long: action.long
+      };
+    default:
+      return state;
+  }
+}
+
 /*function todos(state = [], action) {
   switch (action.type) {
     case ADD_TODO:
@@ -56,8 +84,10 @@ function userId(state = '', action){
 }*/
 
 const canoeApp = combineReducers({
-  currentView: currentView,
-  userId
+  currentView,
+  userId,
+  maxPrice,
+  tripDurations
 });
 
 export default canoeApp;
