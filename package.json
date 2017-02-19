@@ -11,6 +11,8 @@
     "isomorphic-fetch": "^2.2.1",
     "react": "15.4.2",
     "react-native": "0.41.2",
+    "react-native-list-view-select": "^1.0.4",
+    "react-native-multiple-choice": "0.0.8",
     "react-redux": "^5.0.2",
     "redux": "^3.6.0"
   },

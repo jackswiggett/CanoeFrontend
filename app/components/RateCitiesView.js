@@ -8,16 +8,23 @@ import {
   ListView
 } from 'react-native';
 
+import MultipleChoice from 'react-native-multiple-choice'
+
+let map = new Map(['Los Angeles', 'LAX'], ['San Diego', 'SAN']);
+
 const RateCitiesView = function(props) {
   return (
     <View>  
 
       <Text> Pick at least 5 cities that interest you! </Text>
 
-      <ListView
-        style = {styles.lv}
-        dataSource = {this.props.getPopularCities}
-        renderRow = {(rowData) => <Text> {rowData} </Text>} />
+      <MultipleChoice
+        options = {(
+            'Los Angeles',
+            'San Diego'
+          )}
+        selectedOptions = {['Los Angeles']}
+        onSelection = {(city) => this.props.addCity(map.get(city))} />
 
       <Button 
         style={styles.button}

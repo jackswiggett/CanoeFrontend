@@ -6,7 +6,7 @@ import fetch from 'isomorphic-fetch';
 
 export const SET_CURRENT_VIEW = "SET_CURRENT_VIEW";
 export const SET_USER_ID = "SET_USER_ID";
-export const GET_POPULAR_CITIES = "GET_POPULAR_CITIES";
+export const ADD_CITY = "ADD_CITY";
 
 /*
  * other constants
@@ -38,9 +38,9 @@ export function setUserId(userID){
   };
 }
 
-export function getPopularCities(){
+export function addCity(city){
   return{
-    type: GET_POPULAR_CITIES,
-   // popularCities: 
+    type: ADD_CITY,
+    city: city 
   };
 }

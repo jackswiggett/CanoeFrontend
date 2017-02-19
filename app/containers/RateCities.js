@@ -9,7 +9,12 @@ const mapStateToProps = (state, ownProps) => {
 };
 
 const mapDispatchToProps = (dispatch, ownProps) => {
-  return {};
+  return {
+    addCity: (city) => {
+      dispatch(addCity(city))
+    }
+
+  };
 /*    setUserId: (newId) => {
       dispatch(setUserId(newId))
     },

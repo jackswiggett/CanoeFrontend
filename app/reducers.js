@@ -1,5 +1,5 @@
 import { combineReducers } from 'redux';
-import { SET_CURRENT_VIEW, SET_USER_ID, Views } from './actions';
+import { SET_CURRENT_VIEW, SET_USER_ID, ADD_CITY, Views } from './actions';
 const { LOGIN } = Views
 
 /*export default function canoeApp(state = initialState, action) {
@@ -31,6 +31,19 @@ function userId(state = '', action){
   }
 }
 
+function addCity(state = 'Los Angeles', action){
+  switch(action.type){
+    case ADD_CITY:
+      var newList = state.cities.slice();
+      newList.concat([action.city]);
+      return {
+        cities : newList
+      }
+    default:
+      return state;
+  }
+}
+
 /*function todos(state = [], action) {
   switch (action.type) {
     case ADD_TODO:
@@ -57,7 +70,8 @@ function userId(state = '', action){
 
 const canoeApp = combineReducers({
   currentView: currentView,
-  userId
+  userId,
+  addCity
 });
 
 export default canoeApp;
