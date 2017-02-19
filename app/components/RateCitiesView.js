@@ -2,25 +2,39 @@ import React from 'react';
 import {
   Text,
   View,
-  StyleSheet
+  StyleSheet,
+  TextInput,
+  Button
 } from 'react-native';
 
-const Login = function() {
+const RateCitiesView = function(props) {
   return (
     <View>
+
       <Text style={styles.viewName}>
-        Login View
+        {props.userId}
       </Text>
+
     </View>
   );
 }
 
 const styles = StyleSheet.create({
   viewName: {
+    paddingTop:10,
     fontSize: 20,
     textAlign: 'center',
     margin: 10,
+  },
+  textinput: {
+    fontSize: 16,
+    margin: 10,
+    textAlign: 'center',
+  },
+  button: {
+    fontSize : 16,
+    margin: 10
   }
 });
 
-export default Login;
+export default RateCitiesView;

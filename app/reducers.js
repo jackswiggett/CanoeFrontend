@@ -1,10 +1,6 @@
 import { combineReducers } from 'redux';
-import { SET_CURRENT_VIEW, Views } from './actions';
+import { SET_CURRENT_VIEW, SET_USER_ID, Views } from './actions';
 const { LOGIN } = Views
-
-const initialState = {
-  currentView: Views.LOGIN
-};
 
 /*export default function canoeApp(state = initialState, action) {
   switch (action.type) {
@@ -23,6 +19,15 @@ function currentView(state = LOGIN, action) {
       return action.view
     default:
       return state
+  }
+}
+
+function userId(state = '', action){
+  switch(action.type) {
+    case SET_USER_ID:
+      return action.id
+    default:
+      return state;
   }
 }
 
@@ -51,7 +56,8 @@ function currentView(state = LOGIN, action) {
 }*/
 
 const canoeApp = combineReducers({
-  currentView
+  currentView: currentView,
+  userId
 });
 
 export default canoeApp;

@@ -4,7 +4,8 @@ import {
   View,
   StyleSheet
 } from 'react-native';
-import Login from './Login';
+import Login from '../containers/Login';
+import RateCities from '../containers/RateCities';
 
 const CurrentView = function(props) {
   switch (props.currentView) {
@@ -12,11 +13,15 @@ const CurrentView = function(props) {
       return (
         <Login />
       );
+    case "RATE_CITIES":
+      return (
+        <RateCities />
+      );
     default:
       return (
         <View>
           <Text style={styles.viewName}>
-            View not yet supported
+            foo
           </Text>
         </View>
       );
